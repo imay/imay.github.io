@@ -103,6 +103,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 // 这里需要指定使用PowerMockRunner，因为PowerMock可能需要修改一些字节码之类的东西
 @RunWith(PowerMockRunner.class)
+// 这里告诉PowerMock对log4j不要进行Mock，然后可以正常打印，并且在启动命令行中，增加“-Dlog4j.ignoreTCL=true”
+@PowerMockIgnore("org.apache.log4j.*")
 // 这里需要告诉PowerMock需要Mock什么类。多个类的话可以使用{A.class, B.class}方式
 @PrepareForTest({C.class})
 public class ATest {
@@ -122,3 +124,9 @@ public class ATest {
 {% endhighlight %}
 
 至此，两种Mock的方式就都介绍完了，基本上够用了。当然了，对于具体这些Mock的实现机制，我还没有去看，如果要真的明白了的话，可能会对Java会有更加深刻的了解。
+
+## 后续
+
+在后续使用PowerMock的时候还是遇到了不少的坑，都在下述逐步增加
+
+1. 在增加javassist会导致所有的静态函数Mock都失败，可以使用如下方式解决。在JVM启动参数中增加"-XX:-UseSplitVerifier"参数

@@ -75,6 +75,8 @@ void my_func() {
 
 前两步与实验三相同，只是最后一步改变了连接库的顺序。编译成功，执行生成文件，结果显示调用的是`func2.c`中的实现。
 
+以上代码都在[这里](https://github.com/imay/snippet/tree/master/link_order)。
+
 ## 总结
 
 经过上述的一些实验，总结一下吧：
